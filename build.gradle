@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.apache.kafka:kafka-streams'
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	implementation 'org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.1'
+
+	implementation 'org.apache.spark:spark-hive_2.11:2.4.8'
+	implementation("org.apache.spark:spark-sql_2.11:2.4.8")
+
+	implementation 'org.apache.ivy:ivy:2.5.1'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+configurations {
+	all*.exclude group: "log4j", module: "log4j"
+	all*.exclude group: "log4j-slf4j-impl"
+	all*.exclude group: "slf4j-log4j12"
+}
+tasks.named('test') {
+	useJUnitPlatform()
+}
