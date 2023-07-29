@@ -1,5 +1,6 @@
 package com.example.spark.publish;
 
+import com.example.spark.domain.KafkaProperties;
 import com.example.spark.kafka.handler.KafkaProducerHandler;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -19,6 +20,9 @@ public class EventPublisher {
     @Autowired
     KafkaProducerHandler producerHandler;
 
+    @Autowired
+    KafkaProperties kafkaProperties;
+
     public void publishEvents(int eventsCount) {
 
         for (int i = 0; i < eventsCount; i++) {
@@ -26,7 +30,7 @@ public class EventPublisher {
             UUID key = UUID.randomUUID();
 
             ProducerRecord<String, String> producerRecord =
-                    new ProducerRecord<>("test_topic", key.toString(), "Event" + i);
+                    new ProducerRecord<>(kafkaProperties.getTopic(), key.toString(), "Event" + i);
 
             producerHandler.publishEvent(producerRecord, (metadata, ex) -> {
                 if (ex == null) {

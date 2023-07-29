@@ -20,15 +20,16 @@ repositories {
 
 dependencies {
 
-	compileOnly group: 'org.apache.spark', name: 'spark-sql_2.11', version: '2.3.2'
+//	compileOnly group: 'org.apache.spark', name: 'spark-sql_2.11', version: '2.3.2'
 
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.apache.kafka:kafka-streams'
 	implementation 'org.springframework.kafka:spring-kafka'
 
 	implementation('org.apache.spark:spark-sql_2.12:3.3.2')
 	implementation("org.apache.spark:spark-hive_2.12:3.1.0")
 	implementation "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0"
+	implementation 'org.apache.kafka:kafka-streams'
+
 
 	implementation 'org.codehaus.janino:janino:3.0.8'
 
